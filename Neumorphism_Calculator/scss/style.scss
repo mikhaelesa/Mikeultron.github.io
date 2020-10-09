@@ -1,0 +1,183 @@
+// Imports
+@import './variables';
+
+// ----- GLOBALS -----
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: $mainColor;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  transition: .5s;
+}
+
+.buttons{
+  width: 50px;
+  height: 50px;
+  margin: 15px;
+  float: left;
+  border-radius: 50%;
+  border-width: 0;
+  font-weight: bold;
+  font-size: 15px;
+  transition: .1s;
+  background-color: #1a1a1a;
+  box-shadow: $boxShadowDark;
+  color: #5e5e5e;
+  cursor: pointer;
+  transition: .5s;
+  &:focus{
+    outline: 0;
+  }
+  &:active{
+    color: #494949;
+    font-size: 13px;
+    box-shadow: $boxShadowDarkActive;
+  }
+}
+// ----- GLOBALS END -----
+
+
+// ##### LIGHT-MODE ######
+body.light-mode{
+  background-color: $lightBackground;
+  .buttons{
+    background-color: $lightBackground;
+    box-shadow: $boxShadowLight;
+    color: $mainColor;
+    &:active{
+      box-shadow: $boxShadowLightActive;
+    }
+  }
+  .calculator{
+    background-color: $lightBackground;
+    box-shadow: $boxShadowLight;
+    .output-value, .history-value{
+      color: $mainColor;
+    }
+    .keyboard{
+      .empty{
+        @extend .buttons;
+        box-shadow: none;
+        cursor: default;
+        &:active{
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
+// ##### LIGHT-MODE END ######
+
+// ***** DARK-MODE *****
+.container{
+  width: 100%;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .switch-toggle{
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    position: relative;
+    margin-top: 20px;
+    input{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      opacity: 0;
+      &:checked + .switch-body .switch-slider{
+        transform: translateX(50px);
+        background-color: $mainColor;
+      }
+      &:checked + .switch-body{
+        background-color: $lightBackground;
+        box-shadow: $boxShadowLightActive;
+      }
+    }
+    .switch-body{
+      position: relative;
+      width: 100%;
+      height: 40px;
+      border-radius: 40px;
+      background-color: $mainColor;
+      box-shadow: $boxShadowDarkActive;
+      transition: .5s;
+      .switch-slider{
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: $lightBackground;
+        box-shadow: $boxShadowDark;
+        top: 5px;
+        left: 10px;
+        border-radius: 50%;
+        transition: .5s;
+      }
+    }
+  }
+  .calculator{
+    width: 320px;
+    height: 520px;
+    margin: auto;
+    position: relative;
+    border-radius: 40px;
+    background-color: $mainColor;
+    box-shadow: $boxShadowDark;
+    transition: .5s;
+    .result{
+      height: 120px;
+      color: $darkFontColor;
+      overflow: hidden;
+      .history{
+        text-align: right;
+        height: 20px;
+        margin: 0 20px;
+        padding-top: 20px;
+        color: #919191;
+        .history-value{
+          font-size: 15px;
+        }
+      }
+    }
+    .output{
+      text-align: right;
+      height: 60px;
+      margin: 10px 20px;
+      .output-value{
+        font-size: 30px;
+      }
+    }
+    .keyboard{
+      height: 400px;
+      .number{
+        @extend .buttons;
+      }
+      .operator{
+        @extend .buttons;
+      }
+      .empty{
+        @extend .buttons;
+        box-shadow: none;
+        cursor: default;
+        &:active{
+          box-shadow: none;
+        }
+      }
+    }
+  }
+  footer{
+    text-align: center;
+    a{
+      color: #5e5e5e;
+    }
+  }
+}
+// ***** DARK-MODE END *****
